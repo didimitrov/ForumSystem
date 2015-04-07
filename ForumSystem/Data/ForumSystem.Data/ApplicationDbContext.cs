@@ -1,5 +1,7 @@
-﻿using ForumSystem.Models;
+﻿using System.Data.Entity;
+using ForumSystem.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace ForumSystem.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -13,5 +15,7 @@ namespace ForumSystem.Data
         {
             return new ApplicationDbContext();
         }
+
+        public IDbSet<Tag> Tags { get; set; }
     }
 }
