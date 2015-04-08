@@ -1,8 +1,8 @@
-﻿namespace BlogSystem.Data.Contracts
-{
-    using System;
-    using System.Linq;
+﻿using System;
+using System.Linq;
 
+namespace ForumSystem.Common.Repository
+{
     public interface IRepository<T> : IDisposable where T : class
     {
         IQueryable<T> All();
