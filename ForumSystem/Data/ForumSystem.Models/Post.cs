@@ -8,7 +8,7 @@ namespace ForumSystem.Models
     {
         public int Id { get; set; }
         [MaxLength(100)]
-        public string Tittle { get; set; }
+        public string Title { get; set; }
 
         public string Content { get; set; }
         //todo: Author

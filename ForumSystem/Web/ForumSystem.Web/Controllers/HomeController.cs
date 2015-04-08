@@ -1,7 +1,9 @@
 ﻿using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
 using ForumSystem.Common.Repository;
 using ForumSystem.Data;
 using ForumSystem.Models;
+using ForumSystem.Web.ViewModels.Home;
 
 namespace ForumSystem.Web.Controllers
 {
@@ -18,7 +20,7 @@ namespace ForumSystem.Web.Controllers
 
         public ActionResult Index()
         {
-            var posts = _posts.All();
+            var posts = _posts.All().Project().To<IndexBlogPostViewModel>();
             return View(posts);
         }
 
