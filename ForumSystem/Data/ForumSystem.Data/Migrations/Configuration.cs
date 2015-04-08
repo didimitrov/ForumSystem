@@ -9,7 +9,9 @@ namespace ForumSystem.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            //TODO: Remove in production :)
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ForumSystem.Data.ApplicationDbContext context)

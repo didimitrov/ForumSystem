@@ -237,6 +237,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Data\ForumSystem.Common\ForumSystem.Common.csproj">
+      <Project>{7C631A65-0D3E-4FD2-8BF2-3C4F778622E4}</Project>
+      <Name>ForumSystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data\ForumSystem.Data\ForumSystem.Data.csproj">
       <Project>{39ce7204-2c5a-4faf-98a8-1463d497ebf5}</Project>
       <Name>ForumSystem.Data</Name>

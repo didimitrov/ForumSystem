@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using ForumSystem.Data.Migrations;
 using ForumSystem.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -9,6 +10,7 @@ namespace ForumSystem.Data
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
 
         public static ApplicationDbContext Create()
