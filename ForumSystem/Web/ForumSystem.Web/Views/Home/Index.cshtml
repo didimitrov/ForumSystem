@@ -3,8 +3,38 @@
     ViewBag.Title = "Home Page";
 }
 
-@foreach (var item in Model)
-{
-    <h2>@item.Title</h2>
-    @*<p>@item.Content</p>*@
-}
+<div class="container container-fluid">
+    @foreach (var item in Model)
+    {
+        //todo:try with Media-heading Bootstarp
+        <div class="row">
+            <div class="col-md-1 text-center">
+                <div class="label label-danger" >
+                    0<br/>
+                    answers
+                </div>
+            </div>
+            <div class="col-md-1 text-center">
+                <div class="label label-danger">
+                    1<br />
+                    answers
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <h2><a href="#">@item.Title</a></h2>
+                </div>
+                <div class="row">
+                    <p>Asked 35 min ago from....</p>
+                </div>
+                <div class="row">
+                    <span class="label label-info">kids</span>
+                    <span class="label label-info">academy</span>
+                    <span class="label label-info">fun</span>
+                    <span class="label label-info">cheats</span>
+                    </div>
+            </div>
+        </div>   
+       <hr/>   
+    }
+</div>
