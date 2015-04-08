@@ -1,30 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using ForumSystem.Common.Repository;
+using ForumSystem.Data;
+using ForumSystem.Models;
 
 namespace ForumSystem.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IRepository<Post> _posts;
+
+        public HomeController():this(new GenericRepository<Post>(new ApplicationDbContext()))
+        {
+            
+        }
+
+        public HomeController(IRepository<Post> posts)
+        {
+            _posts = posts;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var posts = _posts.All();
+            return View(posts);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+       
     }
 }
