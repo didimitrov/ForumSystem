@@ -9,9 +9,11 @@ namespace ForumSystem.Models
         public int Id { get; set; }
         [MaxLength(100)]
         public string Title { get; set; }
-
         public string Content { get; set; }
-        //todo: Author
+
+        public string AuthorId { get; set; }
+        public virtual ApplicationUser  Author { get; set; }
+
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
     }

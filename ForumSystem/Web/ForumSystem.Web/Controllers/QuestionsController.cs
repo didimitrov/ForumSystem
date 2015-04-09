@@ -36,23 +36,27 @@ namespace ForumSystem.Web.Controllers
         }
 
         [HttpGet]
+        //[ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Ask()
         {
             return View();
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Ask(AskInputModel input)
         {
            if (ModelState.IsValid)
             {
-                var userId = this.User.Identity.GetUserId();
-                var post = new Post()
+                var userId = User.Identity.GetUserId();
+                var post = new Post
                 {
                     Content = input.Content,
                     Title = input.Title,
-                    Id = Convert.ToInt32(userId) //AuthorId
-                    //todo:Author
+                     //AuthorId
+                    AuthorId = userId
                     //todo: Tags
                 }; 
              _posts.Add(post);

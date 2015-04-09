@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Data.Entity;
+using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using ForumSystem.Common.Repository;
 using ForumSystem.Data;
