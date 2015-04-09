@@ -1,10 +1,12 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using ForumSystem.Common.Repository;
 using ForumSystem.Data;
 using ForumSystem.Models;
 using ForumSystem.Web.ViewModels.Home;
+using ForumSystem.Web.ViewModels.Questions;
 
 namespace ForumSystem.Web.Controllers
 {
@@ -25,6 +27,14 @@ namespace ForumSystem.Web.Controllers
             return View(posts);
         }
 
-       
+        public ActionResult Details(int id)
+        {
+            var postDetailModel = _posts.All()
+                .Where(post => post.Id == id)
+                .Project()
+                .To<QuestionDetailsViewModel>().FirstOrDefault();
+
+            return View(postDetailModel);
+        }
     }
 }
