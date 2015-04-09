@@ -10,7 +10,7 @@ namespace ForumSystem.Models
         [MaxLength(100)]
         public string Title { get; set; }
         public string Content { get; set; }
-
+        //todo: CreateOn property
         public string AuthorId { get; set; }
         public virtual ApplicationUser  Author { get; set; }
 

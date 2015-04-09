@@ -13,6 +13,6 @@ namespace ForumSystem.Web.ViewModels.Questions
         public string Content { get; set; }
 
         public string AuthorId { get; set; }
-        public ApplicationUser Author { get; set; }
+        //public ApplicationUser Author { get; set; }
     }
 }

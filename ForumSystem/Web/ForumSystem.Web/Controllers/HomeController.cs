@@ -29,12 +29,19 @@ namespace ForumSystem.Web.Controllers
 
         public ActionResult Details(int id)
         {
-            var postDetailModel = _posts.All()
-                .Where(post => post.Id == id)
-                .Project()
-                .To<QuestionDetailsViewModel>().FirstOrDefault();
+            //var postDetailModel = _posts.All()
+            //    .Where(post => post.Id == id)
+            //    .Project()
+            //    .To<QuestionDetailsViewModel>().FirstOrDefault();
 
-            return View(postDetailModel);
+            var detailsModel = _posts.All().Where(post => post.Id == id).Select(x => new QuestionDetailsViewModel()
+            {
+                AuthorId = User.Identity.Name,
+                Content = x.Content,
+                Title = x.Title
+            }).FirstOrDefault();
+
+            return View(detailsModel);
         }
     }
 }
