@@ -1,14 +1,33 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
+using AutoMapper.QueryableExtensions;
+using ForumSystem.Common.Repository;
+using ForumSystem.Models;
 using ForumSystem.Web.ViewModels.Questions;
+using Microsoft.AspNet.Identity;
 
 namespace ForumSystem.Web.Controllers
 {
     public class QuestionsController : Controller
     {
+        private readonly IDeletableEntityRepository<Post> _posts;
+
+        public QuestionsController(IDeletableEntityRepository<Post> posts)
+        {
+            this._posts = posts;
+        }
+
         // GET: Questions
         public ActionResult Display(int id, string url)
         {
-            return Content(id + " " + url);
+            var viewPostModel = _posts.All().Where(post => post.Id == id)
+                .Project()
+                .To<QuestionDisplayViewModel>()
+                .FirstOrDefault();
+
+
+            return View(viewPostModel);
         }
 
         public ActionResult GetByTag(string tag)
@@ -19,13 +38,28 @@ namespace ForumSystem.Web.Controllers
         [HttpGet]
         public ActionResult Ask()
         {
-            return Content("Get");
+            return View();
         }
 
         [HttpPost]
         public ActionResult Ask(AskInputModel input)
         {
-            return Content("Post");
+           if (ModelState.IsValid)
+            {
+                var userId = this.User.Identity.GetUserId();
+                var post = new Post()
+                {
+                    Content = input.Content,
+                    Title = input.Title,
+                    Id = Convert.ToInt32(userId) //AuthorId
+                    //todo:Author
+                    //todo: Tags
+                }; 
+             _posts.Add(post);
+             _posts.SaveChanges();
+                return RedirectToAction("Display", new {id = post.Id, Url = "new"});
+            }
+            return View(input);
         }
     }
 }
