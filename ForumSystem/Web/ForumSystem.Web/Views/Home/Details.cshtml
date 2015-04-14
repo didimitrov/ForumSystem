@@ -36,6 +36,43 @@
 
     </dl>
 </div>
+
+<br />
+<div id="Comments" class="row">
+    @foreach (var comment in Model.Comments)
+    {
+        @Html.Partial("_CommentPartial", comment)
+    }
+</div>
+@if (User.Identity.IsAuthenticated)
+{
+    using (Ajax.BeginForm("PostComment", new {id =Model.Id}, new AjaxOptions 
+    { HttpMethod = "Post",
+        InsertionMode = InsertionMode.InsertAfter,
+        UpdateTargetId = "Comments",
+        OnFailure = "commentPostFailure" }))
+    {
+        @Html.Hidden("PostId", Model.Id)
+        @Html.TextArea("comment")
+        @Html.AntiForgeryToken()
+        <br />
+        <input type="submit" value="Comment" class="btn btn-default" />
+    }
+}
+
+@section scripts{
+    @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function commentPostFailure() {
+            alert("Error");
+        }
+
+        function hideVoteButton() {
+            $("#vote-button").hide();
+        }
+    </script>*@
+}
+
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
     @Html.ActionLink("Back to List", "Index")
