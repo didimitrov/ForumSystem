@@ -7,6 +7,7 @@ namespace ForumSystem.Web.ViewModels.Home
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public int CountAswers { get; set; }
         
     }
 }

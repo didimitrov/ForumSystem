@@ -18,6 +18,7 @@
             @Html.DisplayFor(model => model.Title)
         </dd>
 
+
         <dt>
             @Html.DisplayNameFor(model => model.Content)
         </dt>
@@ -33,7 +34,22 @@
         <dd>
             @Html.DisplayFor(model => model.AuthorId)
         </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.CountComm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountComm)
+        </dd>
     </dl>
 </div>
 
@@ -47,7 +63,7 @@
 @if (User.Identity.IsAuthenticated)
 {
     using (Ajax.BeginForm("PostComment", new {id =Model.Id}, new AjaxOptions 
-    { HttpMethod = "Post",
+    { HttpMethod = "POST",
         InsertionMode = InsertionMode.InsertAfter,
         UpdateTargetId = "Comments",
         OnFailure = "commentPostFailure" }))
@@ -61,7 +77,7 @@
 }
 
 @section scripts{
-    @*<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>
         function commentPostFailure() {
             alert("Error");
@@ -70,7 +86,7 @@
         function hideVoteButton() {
             $("#vote-button").hide();
         }
-    </script>*@
+    </script>
 }
 
 <p>

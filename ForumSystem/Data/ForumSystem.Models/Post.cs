@@ -10,13 +10,15 @@ namespace ForumSystem.Models
         public Post()
         {
             Comments= new HashSet<Comment>();
+            AskedOn = DateTime.Now;
         }
         [Key]
         public int Id { get; set; }
         [MaxLength(100)]
         public string Title { get; set; }
         public string Content { get; set; }
-        //todo: CreateOn property
+        
+        public DateTime AskedOn { get; set; }
         public string AuthorId { get; set; }
         public virtual ApplicationUser  Author { get; set; }
 

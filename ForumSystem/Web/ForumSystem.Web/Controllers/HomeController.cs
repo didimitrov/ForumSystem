@@ -24,10 +24,11 @@ namespace ForumSystem.Web.Controllers
             _posts = posts;
             this._comments = comments;
         }
-
+         
         public ActionResult Index()
         {
-            var posts = _posts.All().Project().To<IndexBlogPostViewModel>();
+            var posts = _posts.All().OrderByDescending(x=>x.Id).Project().To<IndexBlogPostViewModel>();
+           
             return View(posts);
         }
 
@@ -38,16 +39,27 @@ namespace ForumSystem.Web.Controllers
             //    .Project()
             //    .To<QuestionDetailsViewModel>().FirstOrDefault();
 
+            var currentUserId = User.Identity.GetUserId();
+         
+
             var detailsModel = _posts.All().Where(post => post.Id == id).Select(x => new QuestionDetailsViewModel()
             {
+                Comments = x.Comments.Select(y => new CommentViewModel
+                {
+                    AuthorUsername = y.Author.UserName,
+                    Content = y.Content
+                }).ToList(),
+                Id = x.Id,
                 AuthorId = User.Identity.Name,
                 Content = x.Content,
-                Title = x.Title
+                Title = x.Title,
+                Date = x.AskedOn,
+                CountComm = x.Comments.Count
             }).FirstOrDefault();
 
             return View(detailsModel);
         }
-
+        [HttpPost]
         public ActionResult PostComment(SubmitCommentModel commentModel)
         {
 
@@ -59,6 +71,7 @@ namespace ForumSystem.Web.Controllers
 
                 _comments.Add(new Comment
                 {
+                   // Id =id,
                     AuthorId = userId,
                     Content = commentModel.Comment,
                     PostId = commentModel.PostId

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ForumSystem.Models;
 using ForumSystem.Web.Infrastructure.Mapping;
+using ForumSystem.Web.ViewModels.Home;
 
 namespace ForumSystem.Web.ViewModels.Questions
 {
@@ -9,16 +11,28 @@ namespace ForumSystem.Web.ViewModels.Questions
     {
         public QuestionDetailsViewModel()
         {
-            Comments= new HashSet<Comment>();
+            Comments= new List<CommentViewModel>();
+           // CountComm = Comments.Count;
+           
         }
         
         public int Id { get; set; }
+
         [MaxLength(100)]
         public string Title { get; set; }
+        
         public string Content { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        [Display(Name = "Date")]
+        public DateTime Date { get; set; }
+
+        public int CountComm { get;  set; }
+
+        public List<CommentViewModel> Comments { get; set; }
+
+        [Display(Name = "Author")]
         public string AuthorId { get; set; }
+
         //public ApplicationUser Author { get; set; }
     }
 }
