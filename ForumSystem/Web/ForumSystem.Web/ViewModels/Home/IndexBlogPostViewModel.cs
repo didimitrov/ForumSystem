@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ForumSystem.Models;
 using ForumSystem.Web.Infrastructure.Mapping;
 using Microsoft.Ajax.Utilities;
@@ -20,6 +21,8 @@ namespace ForumSystem.Web.ViewModels.Home
         public int CountComm { get; set; }
 
         public int CountVotes { get; set; }
+
+        public DateTime PostedAgo { get; set; }
 
        // public ICollection<Vote> Votes { get; set; }
        // public List<CommentViewModel> Comments { get; set; }

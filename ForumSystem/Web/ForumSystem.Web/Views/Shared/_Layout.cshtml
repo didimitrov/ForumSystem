@@ -35,14 +35,24 @@
         <li><a href="#">Data</a></li>
     </ol>
     <div class="container body-content">
-        @RenderBody()
+        <div class="row">
+            <div class="col-md-9">
+                @RenderBody()
+            </div>
+            
+                <!-- Right Sidebar -->
+                <aside class="col-md-3 magazine-page">
+                    @Html.Action("Index", "SideBar", routeValues: new { area = string.Empty })
+                </aside>
+                <!-- End Right Sidebar -->
+           
+        </div>
        
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
-
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

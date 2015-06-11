@@ -3,7 +3,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="container container-fluid">
+<div class="container col-md-12">
     @foreach (var item in Model)
     {
         //todo:try with Media-heading Bootstarp
@@ -20,12 +20,13 @@
                     votes
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <div class="row">                    
                     <h3><a href="@Url.Action("Details","Home",new{id=item.Id})">@item.Title</a></h3>
                 </div>
                 <div class="row">
-                    <p>Asked 1 day ago..
+                    <p>Asked on..
+                    @item.PostedAgo
                     </p>
                 </div>
                 <div class="row">
@@ -39,9 +40,9 @@
         <hr/>   
     }
 </div>
-<nav>
+@*<nav>
         <ul class="pager">
             <li><a href="#">Previous</a></li>
             <li><a href="#">Next</a></li>
         </ul>
-    </nav>
+    </nav>*@

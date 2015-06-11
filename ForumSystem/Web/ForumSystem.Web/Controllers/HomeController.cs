@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
@@ -28,14 +29,15 @@ namespace ForumSystem.Web.Controllers
          
         public ActionResult Index()
         {
-           // var posts = _posts.All().OrderByDescending(x=>x.Id).Project().To<IndexBlogPostViewModel>();
 
             var posts = _posts.All().OrderByDescending(x => x.Id).Select(x => new IndexBlogPostViewModel()
             {
                 Title = x.Title,
                 CountComm = x.Comments.Count,
                 CountVotes = x.Votes.Count,
-                Id = x.Id
+                Id = x.Id,
+                PostedAgo = x.AskedOn
+                
                 
             });
             return View(posts);
