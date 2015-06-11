@@ -46,10 +46,10 @@
     </dl>
 </div>
 <div>
-    <p class="">
+    <div class="label label-success">
         <span class="badge" id="article-votes">@Model.Votes</span>
        Likes
-    </p>
+    </div><br />
     @*<div class="label label-success pull-right"> Likes <span id="article-votes">@Model.Votes</span></div><br />*@
     @if (User.Identity.IsAuthenticated && Model.UserCanVote )
     {
@@ -70,7 +70,7 @@
             </h4>
       }else if (!@Model.UserCanVote)
       {
-           <p class="label label-default">You already like this :)</p>
+           <div class="label label-default">(You already like this :)</div>
       }
 </div>
 <br /><hr /> 

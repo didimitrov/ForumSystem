@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
@@ -36,9 +37,8 @@ namespace ForumSystem.Web.Controllers
                 CountComm = x.Comments.Count,
                 CountVotes = x.Votes.Count,
                 Id = x.Id,
-                PostedAgo = x.AskedOn
-                
-                
+                PostedAgo = x.AskedOn,
+            
             });
             return View(posts);
         }

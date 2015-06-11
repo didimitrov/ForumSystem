@@ -10,6 +10,7 @@ namespace ForumSystem.Web.ViewModels.Home
     {
         public IndexBlogPostViewModel()
         {
+            
             //this.Comments=new List<CommentViewModel>();
             //this.CountComm = Comments.Count;
             //this.Votes= new HashSet<Vote>();
@@ -23,6 +24,7 @@ namespace ForumSystem.Web.ViewModels.Home
         public int CountVotes { get; set; }
 
         public DateTime PostedAgo { get; set; }
+        public Tag Tag { get; set; }
 
        // public ICollection<Vote> Votes { get; set; }
        // public List<CommentViewModel> Comments { get; set; }

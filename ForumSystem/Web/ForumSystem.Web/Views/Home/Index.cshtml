@@ -8,19 +8,20 @@
     {
         //todo:try with Media-heading Bootstarp
         <div class="row">
-            <div class="col-md-1 text-center">
-                <div class="label label-success">
+            <div class="col-md-1 text-center" style="background-color: darkgray; border-radius: 5px; border:1px solid crimson">
+                <div class="label label-success" style="background-color: darkgray">
                     @item.CountComm<br />
-                    answers
+                    <p>answers</p>
                 </div>
             </div>
-            <div class="col-md-1 text-center">
-                <div class="label label-success">
-                    @item.CountVotes<br />
-                    votes
-                </div>
+            
+            <div class="col-md-1 text-center" style="background-color: darkgrey; border-radius: 5px; border:1px solid crimson">
+                <div class=" label label-success" style="background-color: darkgrey">
+                @item.CountVotes<br />
+                <p>votes</p>
             </div>
-            <div class="col-md-7">
+            </div>
+            <div class="col-md-7 col-md-offset-1">
                 <div class="row">                    
                     <h3><a href="@Url.Action("Details","Home",new{id=item.Id})">@item.Title</a></h3>
                 </div>
@@ -30,10 +31,10 @@
                     </p>
                 </div>
                 <div class="row">
-                    <span class="label label-info">IT</span>
+                   <span class="label label-info">IT</span>
                     <span class="label label-info">Education</span>
                     <span class="label label-info">Fun</span>
-                    
+                    <a href="#"></a>
                 </div>
             </div>
         </div>   
