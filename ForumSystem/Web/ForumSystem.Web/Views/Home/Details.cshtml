@@ -46,22 +46,32 @@
     </dl>
 </div>
 <div>
-    Votes: <span id="article-votes">@Model.Votes</span>
+    <p class="">
+        <span class="badge" id="article-votes">@Model.Votes</span>
+       Likes
+    </p>
+    @*<div class="label label-success pull-right"> Likes <span id="article-votes">@Model.Votes</span></div><br />*@
     @if (User.Identity.IsAuthenticated && Model.UserCanVote )
     {
-        @Ajax.ActionLink("+","Vote", new { id = Model.Id }, new AjaxOptions
-                        {
-                            InsertionMode = InsertionMode.Replace,
-                            UpdateTargetId = "article-votes",
-                            HttpMethod = "POST",
-                            OnSuccess = "hideVoteButton"
-                        },
-                            new { id = "vote-button", @class = "btn btn-success" })
+        @Ajax.ActionLink("(Vote)","Vote", new { id = Model.Id }, new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "article-votes",
+            HttpMethod = "POST",
+            OnSuccess = "hideVoteButton"
+        },
+                 new { id = "vote-button", @class = "glyphicon glyphicon-thumbs-up "  })
     }
-    else if(!User.Identity.IsAuthenticated)
+    else if (!User.Identity.IsAuthenticated)
     {
-        <p>@Html.ActionLink("Log in to vote!","Login","Account" )</p>
-    }
+        
+            <h4 class=" text-center text-danger alert alert-danger" role="alert">
+                @Html.ActionLink("Log in to vote or comment!", "Login", "Account",null, new { @class = "alert-link" })
+            </h4>
+      }else if (!@Model.UserCanVote)
+      {
+           <p>You already like this :)</p>
+      }
 </div>
 <br /><hr /> 
    

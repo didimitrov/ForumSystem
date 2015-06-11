@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ForumSystem.Models;
 using ForumSystem.Web.Infrastructure.Mapping;
+using Microsoft.Ajax.Utilities;
 
 namespace ForumSystem.Web.ViewModels.Home
 {
@@ -8,16 +9,20 @@ namespace ForumSystem.Web.ViewModels.Home
     {
         public IndexBlogPostViewModel()
         {
-            this.Comments=new List<CommentViewModel>();
-            this.CountComm = Comments.Count;
+            //this.Comments=new List<CommentViewModel>();
+            //this.CountComm = Comments.Count;
+            //this.Votes= new HashSet<Vote>();
+            //this.CountVotes = Votes.Count;
         }
         public int Id { get; set; }
         public string Title { get; set; }
 
         public int CountComm { get; set; }
-        
 
-        public List<CommentViewModel> Comments { get; set; }
+        public int CountVotes { get; set; }
+
+       // public ICollection<Vote> Votes { get; set; }
+       // public List<CommentViewModel> Comments { get; set; }
         
     }
 }

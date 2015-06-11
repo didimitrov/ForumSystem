@@ -28,8 +28,16 @@ namespace ForumSystem.Web.Controllers
          
         public ActionResult Index()
         {
-            var posts = _posts.All().OrderByDescending(x=>x.Id).Project().To<IndexBlogPostViewModel>();
-          
+           // var posts = _posts.All().OrderByDescending(x=>x.Id).Project().To<IndexBlogPostViewModel>();
+
+            var posts = _posts.All().OrderByDescending(x => x.Id).Select(x => new IndexBlogPostViewModel()
+            {
+                Title = x.Title,
+                CountComm = x.Comments.Count,
+                CountVotes = x.Votes.Count,
+                Id = x.Id
+                
+            });
             return View(posts);
         }
 
