@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
@@ -9,26 +10,33 @@ using Microsoft.AspNet.Identity;
 
 namespace ForumSystem.Web.Controllers
 {
+
     public class QuestionsController : Controller
     {
-        private readonly IDeletableEntityRepository<Post> _posts;
+       // private readonly IDeletableEntityRepository<Post> _posts;
+        private readonly IRepository<Vote> _votes;
+        private readonly IRepository<Post> _posts;
 
-        public QuestionsController(IDeletableEntityRepository<Post> posts)
+
+        public QuestionsController(IRepository<Post> posts, IRepository<Vote> votes)
         {
             this._posts = posts;
+            _votes = votes;
         }
 
         // GET: Questions
-        public ActionResult Display(int id, string url)
-        {
-            var viewPostModel = _posts.All().Where(post => post.Id == id)
-                .Project()
-                .To<QuestionDisplayViewModel>()
-                .FirstOrDefault();
+        //public ActionResult Display(int id, string url)
+        //{
+        //    var viewPostModel = _posts.All().Where(post => post.Id == id)
+        //        .Project()
+        //        .To<QuestionDisplayViewModel>()
+        //        .FirstOrDefault();
 
 
-            return View(viewPostModel);
-        }
+        //    return View(viewPostModel);
+        //}
+      
+
 
         public ActionResult GetByTag(string tag)
         {

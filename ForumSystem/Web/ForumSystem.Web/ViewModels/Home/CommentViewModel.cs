@@ -1,6 +1,9 @@
-﻿namespace ForumSystem.Web.ViewModels.Home
+﻿using ForumSystem.Models;
+using ForumSystem.Web.Infrastructure.Mapping;
+
+namespace ForumSystem.Web.ViewModels.Home
 {
-    public class CommentViewModel
+    public class CommentViewModel :IMapFrom<Comment>
     {
         public int Id { get; set; }
 

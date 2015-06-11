@@ -26,6 +26,10 @@ namespace ForumSystem.Web.ViewModels.Questions
         [Display(Name = "Date")]
         public DateTime Date { get; set; }
 
+        public bool UserCanVote { get; set; }
+
+        public int Votes { get; set; }
+
         public int CountComm { get;  set; }
 
         public List<CommentViewModel> Comments { get; set; }

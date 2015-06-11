@@ -43,17 +43,29 @@
             @Html.DisplayFor(model => model.Date)
         </dd>
         
-        <dt>
-            @Html.DisplayNameFor(model => model.CountComm)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CountComm)
-        </dd>
     </dl>
 </div>
-
-<br />
+<div>
+    Votes: <span id="article-votes">@Model.Votes</span>
+    @if (User.Identity.IsAuthenticated && Model.UserCanVote )
+    {
+        @Ajax.ActionLink("+","Vote", new { id = Model.Id }, new AjaxOptions
+                        {
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "article-votes",
+                            HttpMethod = "POST",
+                            OnSuccess = "hideVoteButton"
+                        },
+                            new { id = "vote-button", @class = "btn btn-success" })
+    }
+    else if(!User.Identity.IsAuthenticated)
+    {
+        <p>@Html.ActionLink("Log in to vote!","Login","Account" )</p>
+    }
+</div>
+<br /><hr /> 
+   
+<div><h3>@Model.CountComm Comments</h3></div>
 <div id="Comments" class="row">
     @foreach (var comment in Model.Comments)
     {
@@ -86,6 +98,15 @@
         function hideVoteButton() {
             $("#vote-button").hide();
         }
+
+        function commentPostFailure() {
+            alert("Error");
+        }
+
+        function hideVoteButton() {
+            $("#vote-button").hide();
+        }
+
     </script>
 }
 

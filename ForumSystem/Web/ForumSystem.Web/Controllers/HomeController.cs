@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
@@ -7,6 +8,7 @@ using ForumSystem.Data;
 using ForumSystem.Models;
 using ForumSystem.Web.ViewModels.Home;
 using ForumSystem.Web.ViewModels.Questions;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 
 namespace ForumSystem.Web.Controllers
@@ -15,20 +17,19 @@ namespace ForumSystem.Web.Controllers
     {
         private readonly IRepository<Post> _posts;
         private readonly IRepository<Comment> _comments;
+        private readonly IRepository<Vote> _votes;
 
-
-        
-
-        public HomeController(IRepository<Post> posts, IRepository<Comment> comments)
+        public HomeController(IRepository<Post> posts, IRepository<Comment> comments, IRepository<Vote> votes)
         {
             _posts = posts;
             this._comments = comments;
+            _votes = votes;
         }
          
         public ActionResult Index()
         {
             var posts = _posts.All().OrderByDescending(x=>x.Id).Project().To<IndexBlogPostViewModel>();
-           
+          
             return View(posts);
         }
 
@@ -40,7 +41,6 @@ namespace ForumSystem.Web.Controllers
             //    .To<QuestionDetailsViewModel>().FirstOrDefault();
 
             var currentUserId = User.Identity.GetUserId();
-         
 
             var detailsModel = _posts.All().Where(post => post.Id == id).Select(x => new QuestionDetailsViewModel()
             {
@@ -54,16 +54,44 @@ namespace ForumSystem.Web.Controllers
                 Content = x.Content,
                 Title = x.Title,
                 Date = x.AskedOn,
+                UserCanVote = x.Votes.All(pesho => pesho.VotedById != currentUserId),
+                Votes = x.Votes.Count,
                 CountComm = x.Comments.Count
             }).FirstOrDefault();
 
             return View(detailsModel);
         }
+
+        [HttpPost]
+        public ActionResult Vote(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var canVote = !_votes.All().Any(x => x.PostId == id && x.VotedById == userId);
+
+            if (canVote)
+            {
+                var singleOrDefault = _posts.All().SingleOrDefault(x => x.Id == id);
+                if (singleOrDefault != null)
+                    singleOrDefault.Votes.Add(new Vote
+                    {
+                        PostId = id,
+                        VotedById = userId
+                    });
+                _posts.SaveChanges();
+            }
+
+            var votes = _posts.GetById(id).Votes.Count();
+
+            if (votes != 0)
+            {
+                return Content(votes.ToString(CultureInfo.InvariantCulture));
+            }
+            return Content("0");
+        }
+
         [HttpPost]
         public ActionResult PostComment(SubmitCommentModel commentModel)
         {
-
-
             if (ModelState.IsValid)
             {
                 var userName = User.Identity.GetUserName();
@@ -71,7 +99,6 @@ namespace ForumSystem.Web.Controllers
 
                 _comments.Add(new Comment
                 {
-                   // Id =id,
                     AuthorId = userId,
                     Content = commentModel.Comment,
                     PostId = commentModel.PostId

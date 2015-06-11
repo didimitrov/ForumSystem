@@ -24,6 +24,8 @@ namespace ForumSystem.Data
         public IDbSet<Tag> Tags { get; set; }
         public IDbSet<Post> Posts { get; set; }
         public IDbSet<Comment> Comments { get; set; }
+        public IDbSet<Vote> Votes { get; set; }
+        public IDbSet<Category> Categories { get; set; }
 
         public override int SaveChanges()
         {

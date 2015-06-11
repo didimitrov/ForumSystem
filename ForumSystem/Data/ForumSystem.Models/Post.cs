@@ -11,6 +11,7 @@ namespace ForumSystem.Models
         {
             Comments= new HashSet<Comment>();
             AskedOn = DateTime.Now;
+            this.Votes= new HashSet<Vote>();
         }
         [Key]
         public int Id { get; set; }
@@ -22,7 +23,7 @@ namespace ForumSystem.Models
         public string AuthorId { get; set; }
         public virtual ApplicationUser  Author { get; set; }
 
-        
+        public virtual ICollection<Vote> Votes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 
         public bool IsDeleted { get; set; }
