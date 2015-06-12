@@ -25,16 +25,16 @@ namespace ForumSystem.Web.Controllers
         }
 
         // GET: Questions
-        //public ActionResult Display(int id, string url)
-        //{
-        //    var viewPostModel = _posts.All().Where(post => post.Id == id)
-        //        .Project()
-        //        .To<QuestionDisplayViewModel>()
-        //        .FirstOrDefault();
+        public ActionResult Display(int id, string url)
+        {
+            var viewPostModel = _posts.All().Where(post => post.Id == id)
+                .Project()
+                .To<QuestionDisplayViewModel>()
+                .FirstOrDefault();
 
 
-        //    return View(viewPostModel);
-        //}
+            return View(viewPostModel);
+        }
       
 
 
@@ -63,13 +63,12 @@ namespace ForumSystem.Web.Controllers
                 {
                     Content = input.Content,
                     Title = input.Title,
-                     //AuthorId
-                    AuthorId = userId
+                    AuthorId = userId,
                     //todo: Tags
                 }; 
              _posts.Add(post);
              _posts.SaveChanges();
-                return RedirectToAction("Display", new {id = post.Id, Url = "new"});
+                return RedirectToAction("Display", new {id = post.Id, Url = "new"});  //todo: fix this 
             }
             return View(input);
         }

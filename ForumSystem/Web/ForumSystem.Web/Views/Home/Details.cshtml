@@ -46,7 +46,7 @@
     </dl>
 </div>
 <div>
-    <div class="label label-success">
+    <div class="">
         <span class="badge" id="article-votes">@Model.Votes</span>
        Likes
     </div><br />
@@ -74,8 +74,15 @@
       }
 </div>
 <br /><hr /> 
-   
-<div><h3>@Model.CountComm Comments</h3></div>
+ @if (Model.CountComm == 0)
+ {
+    <div><h3>@Model.CountComm Comments</h3><p>(Write the fist comment)</p></div>
+ }
+ else
+ {
+    <div><h3>@Model.CountComm Comments</h3></div>
+
+ }
 <div id="Comments" class="row">
     @foreach (var comment in Model.Comments)
     {

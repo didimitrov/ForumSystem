@@ -38,6 +38,7 @@ namespace ForumSystem.Web.Controllers
                 CountVotes = x.Votes.Count,
                 Id = x.Id,
                 PostedAgo = x.AskedOn,
+                
             
             });
             return View(posts);
@@ -60,7 +61,7 @@ namespace ForumSystem.Web.Controllers
                     Content = y.Content
                 }).ToList(),
                 Id = x.Id,
-                AuthorId = User.Identity.Name,
+                AuthorId = x.Author.UserName,
                 Content = x.Content,
                 Title = x.Title,
                 Date = x.AskedOn,

@@ -17,6 +17,7 @@ namespace ForumSystem.Web.ViewModels.Home
             //this.CountVotes = Votes.Count;
         }
         public int Id { get; set; }
+
         public string Title { get; set; }
 
         public int CountComm { get; set; }
@@ -24,6 +25,7 @@ namespace ForumSystem.Web.ViewModels.Home
         public int CountVotes { get; set; }
 
         public DateTime PostedAgo { get; set; }
+
         public Tag Tag { get; set; }
 
        // public ICollection<Vote> Votes { get; set; }

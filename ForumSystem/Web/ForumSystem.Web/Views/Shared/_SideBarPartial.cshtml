@@ -4,19 +4,19 @@
 <!-- Search Bar -->
 
     <div class="headline headline-md"><h2>Search</h2></div>
-    <div class="input-group margin-bottom-40">
+    <div class="input-group margin-bottom-40" style="background-color: black">
         <input type="text" class="form-control" placeholder="Search">
         <span class="input-group-btn">
-            <button class=" btn btn-default" type="button">Go</button>
+            <button class=" btn btn-default" >Go</button>
         </span>
     </div>
 
     <!-- End Search Bar -->
-<div class="headline headline-md"><h2>Blog Tags</h2></div>
-<ul class="list-unstyled blog-tags margin-bottom-30">
+<div class="headline headline-md"><h2>Tags</h2></div>
+<ul class="list-unstyled ">
     @foreach (TagViewModel tag in Model.Tags)
-        {
-        <li><a href="#"><i class="fa fa-tags"></i> @tag.Name (@tag.PostCount)</a></li>
-        }
+    {
+        <li class=" label label-info" style="background-color: black"><a href="#"><i class="fa fa-tags"></i> @tag.Name (@tag.PostCount)</a></li>
+    }
 </ul>
 <!-- End Blog Tags -->
