@@ -9,12 +9,12 @@ namespace ForumSystem.Models
     {
         public Tag()
         {
-            this.Posts=new HashSet<Post>();
+            this.Posts=new List<Post>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual List<Post> Posts { get; set; }
         [Index]
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }

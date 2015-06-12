@@ -23,7 +23,8 @@ namespace ForumSystem.Models
         public string AuthorId { get; set; }
         public virtual ApplicationUser  Author { get; set; }
 
-        
+        public int TagId { get; set; }
+        public virtual Tag Tag { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

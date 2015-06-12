@@ -38,7 +38,8 @@ namespace ForumSystem.Web.Controllers
                 CountVotes = x.Votes.Count,
                 Id = x.Id,
                 PostedAgo = x.AskedOn,
-                
+                Tag = x.Tag.Name
+
             
             });
             return View(posts);

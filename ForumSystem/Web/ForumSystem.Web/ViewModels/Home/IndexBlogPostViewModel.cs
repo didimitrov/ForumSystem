@@ -26,7 +26,7 @@ namespace ForumSystem.Web.ViewModels.Home
 
         public DateTime PostedAgo { get; set; }
 
-        public Tag Tag { get; set; }
+        public string Tag { get; set; }
 
        // public ICollection<Vote> Votes { get; set; }
        // public List<CommentViewModel> Comments { get; set; }
