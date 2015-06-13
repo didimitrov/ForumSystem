@@ -9,6 +9,7 @@ namespace ForumSystem.Web.ViewModels.Questions
         [Required]
         [Display(Name = "Question")]
         public string Content { get; set; }
-        public string Tags { get; set; }
+
+        public string TagId { get; set; }
     }
 }

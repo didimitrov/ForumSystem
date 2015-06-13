@@ -1,11 +1,13 @@
 ﻿using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using Antlr.Runtime;
 using ForumSystem.Common.Repository;
 using ForumSystem.Models;
 using ForumSystem.Web.ViewModels.PostModels;
 using ForumSystem.Web.ViewModels.Questions;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace ForumSystem.Web.Controllers
 {
@@ -22,7 +24,7 @@ namespace ForumSystem.Web.Controllers
             _votes = votes;
         }
          
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, int? page)
         {
 
             //var posts = _posts.All().OrderByDescending(x => x.Id).Select(x => new IndexBlogPostViewModel()
@@ -52,7 +54,7 @@ namespace ForumSystem.Web.Controllers
            // ViewBag.MsgCount = _db.Messages.Count(m => m.ForumThread.ForumThreadId == id);
 
 
-            return View(posts);
+            return View(posts.ToPagedList(page ?? 1, 3));
 
         }
 
@@ -115,7 +117,7 @@ namespace ForumSystem.Web.Controllers
         [HttpPost]
         public ActionResult PostComment(SubmitCommentModel commentModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && commentModel.Comment!=null)
             {
                 var userName = User.Identity.GetUserName();
                 var userId = User.Identity.GetUserId();

@@ -68,7 +68,8 @@ namespace ForumSystem.Web.Controllers
                 }; 
              _posts.Add(post);
              _posts.SaveChanges();
-                return RedirectToAction("Display", new {id = post.Id, Url = "new"});  //todo: fix this 
+              //  return RedirectToAction("Display", new {id = post.Id, Url = "new"});  //todo: fix this 
+                return RedirectToAction("Index", "Post");
             }
             return View(input);
         }

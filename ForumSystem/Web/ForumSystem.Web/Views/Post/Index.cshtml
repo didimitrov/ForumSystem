@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ForumSystem.Web.ViewModels.PostModels.IndexBlogPostViewModel>
+﻿@model PagedList.IPagedList<ForumSystem.Web.ViewModels.PostModels.IndexBlogPostViewModel>
+@using PagedList
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Home Page";
 }
@@ -12,9 +14,18 @@
     #scores {
         background-color: darkred; border-radius: 5px; border:1px solid blue;
     }
+    h4>a {
+        color: black;
+        c
+    }
 </style>
 
 <div class="container col-md-12">
+    <div class="row">
+        <div class="col-md-7 col-md-offset-3">
+            <h4> @Html.ActionLink("Ask question", "Ask", "Questions", new { id = ViewData["TagId"] },null)</h4><hr />
+        </div>
+    </div>
     @foreach (var item in Model)
     {
         //todo:try with Media-heading Bootstarp
@@ -41,7 +52,7 @@
                 </div>
                 <div class="row">
                     <p>Asked on..
-                    @item.PostedAgo
+                        @item.PostedAgo
                     </p>
                 </div>
                 <div class="row">
@@ -54,6 +65,7 @@
         </div>   
         <hr/>   
     }
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 </div>
 @*<nav>
         <ul class="pager">

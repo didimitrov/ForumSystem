@@ -76,7 +76,7 @@
 <br /><hr /> 
  @if (Model.CountComm == 0)
  {
-    <div><h3>@Model.CountComm Comments</h3><p>(Write the fist comment)</p></div>
+    <div id="firstComment"><h3>@Model.CountComm Comments</h3><p>(Write the fist comment)</p></div>
  }
  else
  {
@@ -101,7 +101,7 @@
         @Html.TextArea("comment")
         @Html.AntiForgeryToken()
         <br />
-        <input type="submit" value="Comment" class="btn btn-default" />
+        <input type="submit" value="Comment" class="btn btn-default" onclick="hideFirstComment" />
     }
 }
 
@@ -122,6 +122,14 @@
 
         function hideVoteButton() {
             $("#vote-button").hide();
+        }
+
+        function hideFirstComment() {
+            if ($('#Comments').innerHTML!=null) {
+                $('#firstComment').hide();
+
+            }
+            
         }
 
     </script>
