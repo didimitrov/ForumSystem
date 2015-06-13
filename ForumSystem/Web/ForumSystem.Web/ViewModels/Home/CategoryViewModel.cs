@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ForumSystem.Models;
 
-namespace ForumSystem.Web.ViewModels.Category
+namespace ForumSystem.Web.ViewModels.Home
 {
     public class CategoryViewModel
     {

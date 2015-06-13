@@ -1,7 +1,7 @@
 ﻿using ForumSystem.Models;
 using ForumSystem.Web.Infrastructure.Mapping;
 
-namespace ForumSystem.Web.ViewModels.Home
+namespace ForumSystem.Web.ViewModels.PostModels
 {
     public class CommentViewModel :IMapFrom<Comment>
     {

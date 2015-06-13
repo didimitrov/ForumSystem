@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ForumSystem.Models;
 using ForumSystem.Web.Infrastructure.Mapping;
-using ForumSystem.Web.ViewModels.Home;
+using ForumSystem.Web.ViewModels.PostModels;
 
 namespace ForumSystem.Web.ViewModels.Questions
 {

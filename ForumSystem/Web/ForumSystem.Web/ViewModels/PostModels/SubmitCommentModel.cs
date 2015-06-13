@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ForumSystem.Web.ViewModels.Home
+namespace ForumSystem.Web.ViewModels.PostModels
 {
     public class SubmitCommentModel
     {

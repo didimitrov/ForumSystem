@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using AutoMapper.QueryableExtensions;
 using ForumSystem.Common.Repository;
 using ForumSystem.Models;
-using ForumSystem.Web.ViewModels.Home;
+using ForumSystem.Web.ViewModels.PostModels;
 using ForumSystem.Web.ViewModels.SideBar;
 
 namespace ForumSystem.Web.Controllers

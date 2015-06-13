@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using ForumSystem.Models;
 using ForumSystem.Web.Infrastructure.Mapping;
-using Microsoft.Ajax.Utilities;
 
-namespace ForumSystem.Web.ViewModels.Home
+namespace ForumSystem.Web.ViewModels.PostModels
 {
     public class IndexBlogPostViewModel:IMapFrom<Post>
     {

@@ -53,7 +53,7 @@
     @*<div class="label label-success pull-right"> Likes <span id="article-votes">@Model.Votes</span></div><br />*@
     @if (User.Identity.IsAuthenticated && Model.UserCanVote )
     {
-        @Ajax.ActionLink("(Vote)","Vote", new { id = Model.Id }, new AjaxOptions
+        @Ajax.ActionLink("(Vote)","Vote","Post", new { id = Model.Id }, new AjaxOptions
         {
             InsertionMode = InsertionMode.Replace,
             UpdateTargetId = "article-votes",
@@ -91,7 +91,7 @@
 </div>
 @if (User.Identity.IsAuthenticated)
 {
-    using (Ajax.BeginForm("PostComment", new {id =Model.Id}, new AjaxOptions 
+    using (Ajax.BeginForm("PostComment","Post", new {id =Model.Id}, new AjaxOptions 
     { HttpMethod = "POST",
         InsertionMode = InsertionMode.InsertAfter,
         UpdateTargetId = "Comments",
