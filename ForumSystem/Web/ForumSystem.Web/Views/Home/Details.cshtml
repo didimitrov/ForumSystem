@@ -46,7 +46,7 @@
     </dl>
 </div>
 <div>
-    <div class="">
+    <div class="pull-right">
         <span class="badge" id="article-votes">@Model.Votes</span>
        Likes
     </div><br />
@@ -60,7 +60,7 @@
             HttpMethod = "POST",
             OnSuccess = "hideVoteButton"
         },
-                 new { id = "vote-button", @class = "glyphicon glyphicon-thumbs-up "  })
+                 new { id = "vote-button", @class = "glyphicon glyphicon-thumbs-up pull-right"  })
     }
     else if (!User.Identity.IsAuthenticated)
     {

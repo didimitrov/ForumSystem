@@ -6,19 +6,19 @@ using ForumSystem.Common.Models;
 
 namespace ForumSystem.Models
 {
-   public class Category :AuditInfo, IDeletableEntity
+   public class Category : AuditInfo, IDeletableEntity
     {
         public int Id { get; set; }
 
         [Display(Name = "Category")]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
-        public string Description { get; set; }
+        //public string Description { get; set; }
 
-        [DisplayName("Category Img URL")]
-        public string CategoryImgUrl { get; set; }
+        //[DisplayName("Category Img URL")]
+        //public string CategoryImgUrl { get; set; }
 
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
 
        public bool IsDeleted { get; set; }
        public DateTime? DeletedOn { get; set; }

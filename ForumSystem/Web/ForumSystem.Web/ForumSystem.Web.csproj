@@ -193,8 +193,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SideBarController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="ViewModels\Category\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Home\CommentViewModel.cs" />
     <Compile Include="ViewModels\Home\SubmitCommentModel.cs" />
     <Compile Include="ViewModels\Questions\AskInputModel.cs" />
@@ -278,11 +280,11 @@
     <Content Include="Views\Shared\_CommentPartial.cshtml" />
     <Content Include="Views\Shared\_SideBarPartial.cshtml" />
     <Content Include="Views\Tag\Index.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
-    <Folder Include="ViewModels\Tag\" />
     <Folder Include="Views\SideBar\" />
   </ItemGroup>
   <ItemGroup>

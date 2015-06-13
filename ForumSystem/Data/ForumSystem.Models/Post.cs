@@ -29,7 +29,10 @@ namespace ForumSystem.Models
         public virtual ICollection<Vote> Votes { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 
+        public virtual  Category Category { get; set; }
+
         public bool IsDeleted { get; set; }
         public DateTime? DeletedOn { get; set; }
     }
 }
+    

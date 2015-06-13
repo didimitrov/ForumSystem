@@ -28,10 +28,23 @@ namespace ForumSystem.Web.Controllers
             _votes = votes;
         }
          
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
 
-            var posts = _posts.All().OrderByDescending(x => x.Id).Select(x => new IndexBlogPostViewModel()
+            //var posts = _posts.All().OrderByDescending(x => x.Id).Select(x => new IndexBlogPostViewModel()
+            //{
+            //    Title = x.Title,
+            //    CountComm = x.Comments.Count,
+            //    CountVotes = x.Votes.Count,
+            //    Id = x.Id,
+            //    PostedAgo = x.AskedOn,
+            //    Tag = x.Tag.Name
+            //});
+
+            //return View(posts);
+
+
+            var posts = _posts.All().Where(ft => ft.TagId == id).Select(x => new IndexBlogPostViewModel()
             {
                 Title = x.Title,
                 CountComm = x.Comments.Count,
@@ -39,10 +52,14 @@ namespace ForumSystem.Web.Controllers
                 Id = x.Id,
                 PostedAgo = x.AskedOn,
                 Tag = x.Tag.Name
+            }).OrderByDescending(x=>x.CountVotes);
+            TempData["TagId"] = id;
 
-            
-            });
+           // ViewBag.MsgCount = _db.Messages.Count(m => m.ForumThread.ForumThreadId == id);
+
+
             return View(posts);
+
         }
 
         public ActionResult Details(int id)
