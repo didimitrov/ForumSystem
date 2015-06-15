@@ -19,6 +19,7 @@ body {
  h3>a {
          color: darkred;
          text-align: center;
+         background-color: #F9F9F9;
      }
  h3>a:hover {
         text-decoration: none;

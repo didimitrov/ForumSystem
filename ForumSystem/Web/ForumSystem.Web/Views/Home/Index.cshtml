@@ -4,7 +4,6 @@
     ViewBag.Title = "Index";
 }
 <style>
-  
   .accordion-head {
     font-size: 1.2em;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -17,8 +16,14 @@
     -moz-border-radius: 5px;
     -khtml-border-radius: 10px;
 }
+  .accordion {
+      text-align: center;
+  }
+  h3 {
+      text-align: center;
+  }
 </style>
-<h2> Our Categories</h2>
+<h3> Our Categories</h3><hr />
 
 @for (var i = 0; i < Model.Count; i++)
 {
