@@ -3,8 +3,22 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Categories</h2>
+<style>
+  
+  .accordion-head {
+    font-size: 1.2em;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: bold;
+    text-decoration: none !important;
+    background-color: #F9F9F9;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 10px;
+}
+</style>
+<h2> Our Categories</h2>
 
 @for (var i = 0; i < Model.Count; i++)
 {
@@ -13,12 +27,13 @@
     <div class="accordion" id="@divId">
         <div class="accordion-group">
 
-            <div class="accordion-heading">
-                <a class="accordion-toggle accordion-head" data-toggle="collapse" data-parent="#@divId" href="#@collapseId">
-                    @Model[i].CategoryTitle
-                </a>
-                <div>Sub forums: @Model[i].TagsCount</div>
-
+            <div class="accordion-heading row">
+               <h3>
+                    <a class="accordion-toggle accordion-head" data-toggle="collapse" data-parent="#@divId" href="#@collapseId">
+                        @Model[i].CategoryTitle
+                    </a>
+                </h3>
+               <div>Sub forums: @Model[i].TagsCount</div>
             </div>
             <div id="@collapseId" class="accordion-body collapse in">
                 @foreach (var oneSection in Model[i].Tags)
@@ -26,8 +41,8 @@
                     <div class="accordion-inner">
                         <b>@Html.ActionLink(oneSection.Name, "Index", "Post", new { id = oneSection.Id }, null)</b>
 
-                        <div class="description">@Html.DisplayName("Description: ") </div>
-                        <div>Threads: </div>
+                        @*<div class="description">@Html.DisplayName("Description: ") </div>*@
+                        <div>Posts:@oneSection.Posts.Count </div>
                     </div>
                 }
 

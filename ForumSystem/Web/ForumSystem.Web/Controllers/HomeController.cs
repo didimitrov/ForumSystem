@@ -22,7 +22,8 @@ namespace ForumSystem.Web.Controllers
             {
                 CategoryTitle = x.Title ,
                 Tags = x.Tags,
-                TagsCount = x.Tags.Count
+                TagsCount = x.Tags.Count,
+                //PostCount = x.Post.Count
             }).ToList();
 
             return View(categories);

@@ -3,47 +3,53 @@
 @{
     ViewBag.Title = "Details";
 }
+<style>
+  .postAutor {
+    margin: 5px;
+    float: left;
+    width: 22%;
+    background: #efeeef;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 10px;
+    min-height: 75px;
+    text-align: center;
+}
 
-<h2>Question Details</h2>
+
+.postBody {
+    margin: 5px;
+    
+    width: 75%;
+    /*background: #efeeef;*/
+    border-radius: 5px;
+   min-height: 75px;
+}
+.content {
+    font-weight: bolder;
+        
+}
+
+</style>
+@*<h2>Question Details</h2>*@
 
 <div>
     
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    @*<hr />*@
+   <h2>
+        @Html.DisplayFor(model => model.Title)
+    </h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AuthorId)
-        </dd>
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        
-    </dl>
+    <div class=" row postBody">
+        <div class="content">
+            @Html.DisplayFor(model => model.Content)<hr />
+        </div>
+        <div>
+            Author: <strong> @Html.DisplayFor(model => model.AuthorId)</strong> |
+            Posted on:<strong> @Html.DisplayFor(model => model.Date)</strong>   
+        </div>
+    </div>
 </div>
 <div>
     <div class="pull-right">
@@ -70,10 +76,10 @@
             </h4>
       }else if (!@Model.UserCanVote)
       {
-           <div class="label label-default">(You already like this :)</div>
+           <div class=" pull-right">(You already like this :)</div>
       }
 </div>
-<br /><hr /> 
+<br />
  @if (Model.CountComm == 0)
  {
     <div id="firstComment"><h3>@Model.CountComm Comments</h3><p>(Write the fist comment)</p></div>
