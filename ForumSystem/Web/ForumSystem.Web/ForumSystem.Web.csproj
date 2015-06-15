@@ -202,6 +202,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SideBarController.cs" />
     <Compile Include="Controllers\TagController.cs" />
+    <Compile Include="Models\Enums\Tags.cs" />
     <Compile Include="ViewModels\Home\CategoryViewModel.cs" />
     <Compile Include="ViewModels\PostModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\PostModels\SubmitCommentModel.cs" />

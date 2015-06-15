@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Routing;
 using AutoMapper.QueryableExtensions;
 using ForumSystem.Common.Repository;
 using ForumSystem.Models;
@@ -64,12 +65,15 @@ namespace ForumSystem.Web.Controllers
                     Content = input.Content,
                     Title = input.Title,
                     AuthorId = userId,
+                    TagId = input.TagId,
+                    Category = input.Category
+                    
                     //todo: Tags
                 }; 
              _posts.Add(post);
              _posts.SaveChanges();
               //  return RedirectToAction("Display", new {id = post.Id, Url = "new"});  //todo: fix this 
-                return RedirectToAction("Index", "Post");
+                return RedirectToAction("Index", "Post", new {id =post.TagId});
             }
             return View(input);
         }

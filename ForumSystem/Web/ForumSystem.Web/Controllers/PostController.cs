@@ -23,8 +23,8 @@ namespace ForumSystem.Web.Controllers
             this._comments = comments;
             _votes = votes;
         }
-         
-        public ActionResult Index(int id, int? page)
+
+        public ActionResult Index(int? page, int id)  // = (int)Models.Enums.Tags.Maincategory
         {
 
             //var posts = _posts.All().OrderByDescending(x => x.Id).Select(x => new IndexBlogPostViewModel()
@@ -48,7 +48,8 @@ namespace ForumSystem.Web.Controllers
                 Id = x.Id,
                 PostedAgo = x.AskedOn,
                 Tag = x.Tag.Name
-            }).OrderByDescending(x=>x.CountVotes);
+            }).OrderByDescending(x=>x.PostedAgo);
+
             TempData["TagId"] = id;
 
            // ViewBag.MsgCount = _db.Messages.Count(m => m.ForumThread.ForumThreadId == id);

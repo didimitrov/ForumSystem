@@ -7,6 +7,8 @@ using ForumSystem.Web.ViewModels.SideBar;
 
 namespace ForumSystem.Web.Controllers
 {
+    //replaced with category/home controller
+
     public class TagController : Controller
     {
         private readonly IRepository<Tag> _tagRepository;
