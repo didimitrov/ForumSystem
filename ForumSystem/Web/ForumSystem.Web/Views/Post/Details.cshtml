@@ -19,19 +19,16 @@
 
 
 .postBody {
- 
     margin: 5px;
     width: 75%;
     /*background: #efeeef;*/
     border-radius: 5px;
-   min-height: 75px;
+    min-height: 75px;
   
 }
 .content {
     font-weight: bolder;
-        
-}
-
+     }
 </style>
 @*<h2>Question Details</h2>*@
 
@@ -47,7 +44,7 @@
         </div>
         <div>
             Author: <strong> @Html.DisplayFor(model => model.AuthorId)</strong> |
-            Posted on:<strong> @Html.DisplayFor(model => model.Date)</strong>
+            Date: <strong> @Html.DisplayFor(model => model.Date)</strong>
             <div class="pull-right">
                 <span class="badge" id="article-votes">@Model.Votes</span>
                 Likes
@@ -86,11 +83,11 @@
 <br />
  @if (Model.CountComm == 0)
  {
-    <div id="firstComment"><h3>@Model.CountComm Comments</h3><p>(Write the fist comment)</p></div>
+    <div id="firstComment"><h4>@Model.CountComm Comments</h4><p>(Write the fist comment)</p></div>
  }
  else
  {
-    <div><h3>@Model.CountComm Comments</h3></div>
+    <div><h4>@Model.CountComm Comments</h4></div>
 
  }
 <div id="Comments" class="row">
@@ -147,5 +144,5 @@
 
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", new{id =Model.Id})
 </p>

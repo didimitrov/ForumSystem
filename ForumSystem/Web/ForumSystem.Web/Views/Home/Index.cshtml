@@ -16,6 +16,9 @@
     -moz-border-radius: 5px;
     -khtml-border-radius: 10px;
 }
+  /*.accordion-inner {
+      font-size: 15px;
+  }*/
   .accordion {
       text-align: center;
   }
@@ -44,7 +47,7 @@
                 @foreach (var oneSection in Model[i].Tags)
                 {
                     <div class="accordion-inner">
-                        <b>@Html.ActionLink(oneSection.Name, "Index", "Post", new { id = oneSection.Id }, null)</b>
+                        <b style="font-size: 15px">@Html.ActionLink(oneSection.Name, "Index", "Post", new { id = oneSection.Id }, null)</b>
 
                         @*<div class="description">@Html.DisplayName("Description: ") </div>*@
                         <div>Posts:@oneSection.Posts.Count </div>

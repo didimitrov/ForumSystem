@@ -8,6 +8,8 @@ namespace ForumSystem.Web.ViewModels.SideBar
 {
     public class TagViewModel:IMapFrom<Tag>, IHaveCustomMappings
     {
+        public int  Id { get; set; }
+
         public string Name { get; set; }
 
         public int PostCount { get; set; }

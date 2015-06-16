@@ -20,7 +20,8 @@
 <ul class="list-unstyled ">
     @foreach (TagViewModel tag in Model.Tags)
     {
-        <li class=" label label-info" style="background-color: black"><span><a href="#"><i class="fa fa-tags"></i> @tag.Name (@tag.PostCount)</a></span></li>
+       
+        <li class=" label label-info" style="background-color: black"><span><a href="#"><i class="tags"></i> @tag.Name (@tag.PostCount)</a></span></li>
     }
 </ul>
 <!-- End Blog Tags -->
