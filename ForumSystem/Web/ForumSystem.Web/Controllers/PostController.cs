@@ -1,7 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using Antlr.Runtime;
 using ForumSystem.Common.Repository;
 using ForumSystem.Models;
 using ForumSystem.Web.ViewModels.PostModels;
@@ -24,7 +24,7 @@ namespace ForumSystem.Web.Controllers
             _votes = votes;
         }
 
-        public ActionResult Index(int? page, int id)  // = (int)Models.Enums.Tags.Maincategory
+        public ActionResult Index(int? page, int id)  
         {
 
             //var posts = _posts.All().OrderByDescending(x => x.Id).Select(x => new IndexBlogPostViewModel()
@@ -36,9 +36,7 @@ namespace ForumSystem.Web.Controllers
             //    PostedAgo = x.AskedOn,
             //    Tag = x.Tag.Name
             //});
-
             //return View(posts);
-
 
             var posts = _posts.All().Where(ft => ft.TagId == id).Select(x => new IndexBlogPostViewModel()
             {
@@ -52,12 +50,8 @@ namespace ForumSystem.Web.Controllers
 
             TempData["TagId"] = id;
 
-           // ViewBag.MsgCount = _db.Messages.Count(m => m.ForumThread.ForumThreadId == id);
-
-
             return View(posts.ToPagedList(page ?? 1, 3));
-
-        }
+            }
 
         public ActionResult Details(int id)
         {
@@ -127,14 +121,75 @@ namespace ForumSystem.Web.Controllers
                 {
                     AuthorId = userId,
                     Content = commentModel.Comment,
-                    PostId = commentModel.PostId
+                    PostId = commentModel.PostId,
+                    DateTime = DateTime.Now
                 });
                 _comments.SaveChanges();
 
-                var viewModel = new CommentViewModel { AuthorUsername = userName, Content = commentModel.Comment };
+                var viewModel = new CommentViewModel { AuthorUsername = userName, Content = commentModel.Comment ,DateTime = DateTime.Now};
                 return PartialView("_CommentPartial", viewModel);
             }
             return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
         }
+
+
+
+
+
+
+
+
+
+       // [HttpGet]
+       // public ActionResult CreateComments()
+       // {
+       //     return PartialView("_CreateCommentPartial");
+       // }
+
+
+       //[HttpPost]
+       // public ActionResult CreateComments(SubmitCommentModel commentModel)
+       // {
+       //     var userName = User.Identity.GetUserName();
+       //     var userId = User.Identity.GetUserId();
+
+       //     if (ModelState.IsValid && commentModel.Comment != null)
+       //     {
+       //         if (commentModel.ParentId == null)
+       //         {
+       //             _comments.Add(new Comment
+       //             {
+       //                 AuthorId = userId,
+       //                 Content = commentModel.Comment,
+       //                 PostId = commentModel.PostId,
+                       
+       //             });
+       //             _comments.SaveChanges();
+
+       //             var viewModel = new CommentViewModel {AuthorUsername = userName, Content = commentModel.Comment};
+       //             return PartialView("_CommentPartial", viewModel);
+       //         }
+       //         else
+       //         {
+       //             _comments.Add(new Comment
+       //             {
+       //                 PostId = commentModel.Id,
+       //                 AuthorId = userId,
+       //                 Content = commentModel.Comment,
+       //                 ParentId = commentModel.Id
+       //             });
+       //             _comments.SaveChanges();
+       //             var viewModel = new CommentViewModel()
+       //             {
+       //                 AuthorUsername = userName,
+       //                 Content = commentModel.Comment
+       //             };
+       //             return PartialView("_CreateCommentPartial", viewModel);
+       //         }
+
+       //     }
+
+       //     return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
+       // }
     }
 }

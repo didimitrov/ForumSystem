@@ -23,32 +23,27 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Categories", "Index", "Home")</li>
                     <li>@Html.ActionLink("Ask question", "Ask", "Questions")</li>
-                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
-                </ul>
+                  </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <ol class="breadcrumb">
         <li class="active">Home</li>
-        <li><a href="#">Ask</a></li>
-        <li><a href="#">Data</a></li>
+        
     </ol>
     <div class="container body-content">
         <div class="row">
             <div class="col-md-9">
                 @RenderBody()
             </div>
-            
-                <!-- Right Sidebar -->
+            <!-- Right Sidebar -->
                 <aside class="col-md-3 magazine-page">
                     @Html.Action("Index", "SideBar", routeValues: new { area = string.Empty })
                 </aside>
                 <!-- End Right Sidebar -->
-           
-        </div>
-       
-    </div>
+           </div>
+       </div>
     <hr />
     <footer style="text-align: center" class="">
         <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

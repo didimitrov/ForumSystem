@@ -1,0 +1,51 @@
+﻿@model ForumSystem.Web.ViewModels.PostModels.CommentViewModel
+<div>
+@if (User.Identity.IsAuthenticated)
+    {
+        using (Ajax.BeginForm("CreateComments", "Post", new {id = Model.Id}, new AjaxOptions
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.InsertAfter,
+            UpdateTargetId = "nestedComments",
+            OnFailure = "commentPostFailure"
+        }))
+        {
+            @Html.Hidden("ParentId", Model.Id)
+            @Html.TextArea("comment")
+            @Html.AntiForgeryToken()
+            <br />
+            <input type="submit" value="Replay" class="btn btn-default" onclick=" hideFirstComment " />
+        }
+    }
+
+<div id="nestedComments"></div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function commentPostFailure() {
+            alert("Error");
+        }
+
+        function hideVoteButton() {
+            $("#vote-button").hide();
+        }
+
+        function commentPostFailure() {
+            alert("Error");
+        }
+
+        function hideVoteButton() {
+            $("#vote-button").hide();
+        }
+
+        function hideFirstComment() {
+            if ($('#Comments').innerHTML != null) {
+                $('#firstComment').hide();
+
+            }
+
+        }
+
+    </script>
+}

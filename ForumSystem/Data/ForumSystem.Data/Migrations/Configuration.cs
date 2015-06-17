@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using ForumSystem.Models;
+
 namespace ForumSystem.Data.Migrations
 {
     using System;
@@ -16,18 +19,20 @@ namespace ForumSystem.Data.Migrations
 
         protected override void Seed(ForumSystem.Data.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            //new List<Category>
+            //{
+            //    new Category() { Id = 1, Title = "IT",IsDeleted = false},
+            //    new Category() { Id = 2, Title = "Games",IsDeleted = false},
+               
+            //}.ForEach(i => context.Categories.AddOrUpdate(i));
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            //new List<Tag>
+            //{
+            //    new Tag { Id = 1, Name = ".NET", CategoryId =1, IsDeleted = false},
+            //    new Tag { Id = 2, Name = "QuakeLive", CategoryId =2, IsDeleted = false },
+               
+            //}.ForEach(t => context.Tags.AddOrUpdate(t));
+
         }
     }
 }

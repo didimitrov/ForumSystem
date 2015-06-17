@@ -1,6 +1,64 @@
 ﻿@model ForumSystem.Web.ViewModels.PostModels.CommentViewModel
 <div class="jumbotron" style="border: 1px solid purple; max-height: 150px; margin-bottom: 10px">
     <div><strong>@Model.Content</strong></div><br />
-    <div>Commented by: <em><strong>@Model.AuthorUsername</strong></em></div>
-    <a href="#" class="pull-right label label-info">Replay</a>
+    <div><span>commented by <em><strong>@Model.AuthorUsername</strong></em></span> on <strong>@Model.DateTime</strong></div>
+    @*<a href="#" class="pull-right label label-info">Replay</a>*@
+    
+
+    @*@Ajax.ActionLink("Replay", "CreateComments","Post", new AjaxOptions
+   {
+       HttpMethod = "GET",
+       InsertionMode = InsertionMode.InsertAfter,
+       UpdateTargetId = "CommentsSec",
+       OnFailure = "commentPostFailure"
+   })*@
+    
+@*@if (User.Identity.IsAuthenticated)
+{
+    using (Ajax.BeginForm("CreateComments", "Post", new {pid = Model.Id}, new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.InsertAfter,
+        UpdateTargetId = "Comments",
+        OnFailure = "commentPostFailure"
+    }))
+    {
+        @Html.Hidden("PostId", Model.Id)
+        @Html.TextArea("comment")
+        @Html.AntiForgeryToken()
+        <br />
+        <input type="submit" value="Replay" class="btn btn-default" onclick=" hideFirstComment " />
+    }
+}*@
+
+    <div id="CommentsSec"></div>
 </div>
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function commentPostFailure() {
+            alert("Error");
+        }
+
+        function hideVoteButton() {
+            $("#vote-button").hide();
+        }
+
+        function commentPostFailure() {
+            alert("Error");
+        }
+
+        function hideVoteButton() {
+            $("#vote-button").hide();
+        }
+
+        function hideFirstComment() {
+            if ($('#Comments').innerHTML != null) {
+                $('#firstComment').hide();
+
+            }
+
+        }
+
+    </script>
+}

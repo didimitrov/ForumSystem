@@ -81,7 +81,7 @@
   
 </div>
 <br />
- @if (Model.CountComm == 0)
+@*@if (Model.CountComm == 0)
  {
     <div id="firstComment"><h4>@Model.CountComm Comments</h4><p>(Write the fist comment)</p></div>
  }
@@ -89,11 +89,17 @@
  {
     <div><h4>@Model.CountComm Comments</h4></div>
 
- }
+ }*@
+<h4> Comments(@Model.Comments.Count)</h4><hr />
 <div id="Comments" class="row">
-    @foreach (var comment in Model.Comments)
+    @foreach (var comment in Model.Comments.Where(x=>x.ParentId==null))
     {
         @Html.Partial("_CommentPartial", comment)
+        <div id="nestedComments"></div>
+        foreach (var x in Model.Comments.Where(x=>x.ParentId==comment.Id))
+        {
+  
+        }
     }
 </div>
 @if (User.Identity.IsAuthenticated)

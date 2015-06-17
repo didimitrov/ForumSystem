@@ -13,6 +13,7 @@ namespace ForumSystem.Web.ViewModels.SideBar
         public string Name { get; set; }
 
         public int PostCount { get; set; }
+
         public virtual List<Post> Posts  { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

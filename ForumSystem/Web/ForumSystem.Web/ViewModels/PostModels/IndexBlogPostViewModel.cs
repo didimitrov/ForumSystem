@@ -8,11 +8,6 @@ namespace ForumSystem.Web.ViewModels.PostModels
     {
         public IndexBlogPostViewModel()
         {
-            
-            //this.Comments=new List<CommentViewModel>();
-            //this.CountComm = Comments.Count;
-            //this.Votes= new HashSet<Vote>();
-            //this.CountVotes = Votes.Count;
         }
         public int Id { get; set; }
 

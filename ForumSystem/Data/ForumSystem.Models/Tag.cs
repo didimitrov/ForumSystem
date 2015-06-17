@@ -16,6 +16,7 @@ namespace ForumSystem.Models
 
         public virtual List<Post> Posts { get; set; }
 
+        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         [Index]
         public bool IsDeleted { get; set; }

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ForumSystem.Models
 {
@@ -15,5 +17,11 @@ namespace ForumSystem.Models
 
         public int PostId { get; set; }
         public virtual Post Post { get; set; }
+
+
+        public int? ParentId { get; set; }
+        public Comment[] ChildComments { get; set; }
+
+        public DateTime DateTime { get; set; }
     }
 }
