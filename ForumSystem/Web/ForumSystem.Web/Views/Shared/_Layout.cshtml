@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ForumSystem.Web.Views.Helpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -29,8 +30,17 @@
         </div>
     </div>
     <ol class="breadcrumb">
-        <li class="active">Home</li>
+        @Html.ActionLink("Home", "Index", "Home")
+        @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+        {
+            @:\ @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
+        }
+        @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+        {
+            @:\ @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+        }
         
+        @*@Html.Raw(Html.BuildBreadcrumbNavigation())*@
     </ol>
     <div class="container body-content">
         <div class="row">
@@ -38,7 +48,7 @@
                 @RenderBody()
             </div>
             <!-- Right Sidebar -->
-                <aside class="col-md-3 magazine-page">
+                <aside class="col-md-3 ">
                     @Html.Action("Index", "SideBar", routeValues: new { area = string.Empty })
                 </aside>
                 <!-- End Right Sidebar -->

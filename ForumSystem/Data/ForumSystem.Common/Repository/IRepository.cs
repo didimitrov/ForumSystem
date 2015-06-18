@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 
 namespace ForumSystem.Common.Repository
 {
-    public interface IRepository<T> : IDisposable where T : class
+    public interface IRepository<T> : IDisposable
     {
         IQueryable<T> All();
 

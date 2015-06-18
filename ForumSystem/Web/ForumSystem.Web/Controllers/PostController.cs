@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
@@ -70,6 +71,7 @@ namespace ForumSystem.Web.Controllers
                     Content = y.Content
                 }).ToList(),
                 Id = x.Id,
+                TagId = x.TagId,
                 AuthorId = x.Author.UserName,
                 Content = x.Content,
                 Title = x.Title,
@@ -132,6 +134,36 @@ namespace ForumSystem.Web.Controllers
             return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
         }
 
+        public ActionResult Search(string search, string searchBy, string sortBy, int? page)
+        {
+            ViewBag.SortNameParameter = string.IsNullOrEmpty(sortBy) ? "Name desc" : "";
+
+            var searchResults = new List<Post>();
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                foreach (var thread in _posts.All())
+                {
+                    searchResults.Add(thread);
+                }
+
+                if (!string.IsNullOrWhiteSpace(search))
+                    searchResults = searchResults.Where(m => m.Title.ToLower().Contains(search)).ToList();
+
+                switch (sortBy)
+                {
+                    case "Name desc":
+                        searchResults = searchResults.OrderByDescending(a => a.Id).ToList();
+                        break;
+                    default:
+                        searchResults = searchResults.OrderBy(a => a.Id).ToList();
+                        break;
+                }
+            }
+
+
+            return View(searchResults.ToPagedList(page ?? 1, 3));
+        }
 
 
 

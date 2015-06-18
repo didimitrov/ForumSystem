@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ForumSystem.Models;
 using ForumSystem.Web.Infrastructure.Mapping;
 
@@ -8,11 +9,11 @@ namespace ForumSystem.Web.ViewModels.PostModels
     {
         public IndexBlogPostViewModel()
         {
-        }
+           }
         public int Id { get; set; }
 
         public string Title { get; set; }
-
+        
         public int CountComm { get; set; }
 
         public int CountVotes { get; set; }

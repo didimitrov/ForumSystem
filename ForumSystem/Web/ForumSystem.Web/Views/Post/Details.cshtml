@@ -4,38 +4,36 @@
     ViewBag.Title = "Details";
 }
 <style>
-  .postAutor {
-    margin: 5px;
-    float: left;
-    width: 22%;
-    background: #efeeef;
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 5px;
-    -khtml-border-radius: 10px;
-    min-height: 75px;
-    text-align: center;
-}
+    .postAutor {
+        margin: 5px;
+        float: left;
+        width: 22%;
+        background: #efeeef;
+        border-radius: 6px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 5px;
+        -khtml-border-radius: 10px;
+        min-height: 75px;
+        text-align: center;
+    }
 
-
-.postBody {
-    margin: 5px;
-    width: 75%;
-    /*background: #efeeef;*/
-    border-radius: 5px;
-    min-height: 75px;
+    .postBody {
+        margin: 5px;
+        width: 75%;
+        /*background: #efeeef;*/
+        border-radius: 5px;
+        min-height: 75px;
   
-}
-.content {
-    font-weight: bolder;
-     }
+    }
+    .content {
+        font-weight: bolder;
+    }
 </style>
+
 @*<h2>Question Details</h2>*@
 
 <div>
-    
-    @*<hr />*@
-   <h2>
+  <h2>
         @Html.DisplayFor(model => model.Title)
     </h2>
     <div class=" row postBody">
@@ -50,7 +48,7 @@
                 Likes
             </div>
             <br />
-            @*<div class="label label-success pull-right"> Likes <span id="article-votes">@Model.Votes</span></div><br />*@
+           
             @if (User.Identity.IsAuthenticated && Model.UserCanVote)
             {
                 @Ajax.ActionLink("(Vote)", "Vote", "Post", new { id = Model.Id }, new AjaxOptions
@@ -64,7 +62,7 @@
             }
             else if (!User.Identity.IsAuthenticated)
             {
-
+               <br/>
                 <h4 class=" text-center text-danger alert alert-danger" role="alert">
                     @Html.ActionLink("Log in to vote or comment!", "Login", "Account", null, new { @class = "alert-link" })
                 </h4>
@@ -150,5 +148,5 @@
 
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
-    @Html.ActionLink("Back to List", "Index", new{id =Model.Id})
+    @Html.ActionLink("Back to List", "Index", new{id =Model.TagId})
 </p>

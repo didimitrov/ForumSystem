@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using ForumSystem.Common.Repository;
 using ForumSystem.Models;
@@ -28,5 +29,7 @@ namespace ForumSystem.Web.Controllers
 
             return View(categories);
         }
+
+       
     }
 }

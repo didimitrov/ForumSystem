@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Security.AccessControl;
 using ForumSystem.Models;
 using ForumSystem.Web.Infrastructure.Mapping;
 using ForumSystem.Web.ViewModels.PostModels;
@@ -12,9 +13,7 @@ namespace ForumSystem.Web.ViewModels.Questions
         public QuestionDetailsViewModel()
         {
             Comments= new List<CommentViewModel>();
-           // CountComm = Comments.Count;
-           
-        }
+         }
         
         public int Id { get; set; }
 
@@ -31,6 +30,8 @@ namespace ForumSystem.Web.ViewModels.Questions
         public int Votes { get; set; }
 
         public int CountComm { get;  set; }
+
+        public int TagId { get; set; }
 
         public List<CommentViewModel> Comments { get; set; }
 

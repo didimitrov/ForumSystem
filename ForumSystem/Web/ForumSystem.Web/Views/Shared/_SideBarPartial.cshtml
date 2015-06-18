@@ -8,20 +8,42 @@
 <!-- Search Bar -->
 
     <div class="headline headline-md"><h4>Search</h4></div>
-    <div class="input-group margin-bottom-40" style="background-color: black">
+<div class="input-group margin-bottom-40" style="background-color: black">
         <input type="text" class="form-control" placeholder="Search">
         <span class="input-group-btn">
             <button class=" btn btn-default" >Go</button>
         </span>
     </div>
 
-    <!-- End Search Bar -->
+@*@using (Html.BeginForm("Search", "Forum", FormMethod.Get))
+{
+    <input type="text" name="search" /><input type="submit" value="Search" />
+}
+
+<table>
+    <tr>
+        <th>@Html.ActionLink("Sort by name", "Search", new { sortBy = ViewBag.SortNameParameter, search = Request["search"] }) </th>
+    </tr>
+    @foreach (var thread in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.ActionLink(thread, "Details", "Post", new { id = thread. }, null)
+            </td>
+        </tr>
+    }
+</table>*@
+
+
+<!-- End Search Bar -->
 <div class="headline headline-md"><h4>Tags</h4></div>
 <ul class="list-unstyled ">
     @foreach (TagViewModel tag in Model.Tags)
     {
        
-        <li class=" label label-info" style="background-color: black"><span><a href="#"><i class="tags"></i> @tag.Name (@tag.PostCount)</a></span></li>
+
+        <li class=" label label-info" style="background-color: black"><span>@Html.ActionLink(tag.Name, "Index", "Post", new { id = tag.Id }, null)</span><span>(@tag.PostCount)</span></li>
     }
 </ul>
 <!-- End Blog Tags -->
