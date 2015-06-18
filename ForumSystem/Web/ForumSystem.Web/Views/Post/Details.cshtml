@@ -1,4 +1,5 @@
-﻿@model ForumSystem.Web.ViewModels.Questions.QuestionDetailsViewModel
+﻿@using Antlr.Runtime.Tree
+@model ForumSystem.Web.ViewModels.Questions.QuestionDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -28,12 +29,15 @@
     .content {
         font-weight: bolder;
     }
+    #text {
+        border: 1px solid black;
+    }
 </style>
 
-@*<h2>Question Details</h2>*@
 
 <div>
-  <h2>
+    <div class="well">
+    <h2>
         @Html.DisplayFor(model => model.Title)
     </h2>
     <div class=" row postBody">
@@ -41,28 +45,28 @@
             @Html.DisplayFor(model => model.Content)<hr />
         </div>
         <div>
-            Author: <strong> @Html.DisplayFor(model => model.AuthorId)</strong> |
+            Author: <strong class="label label-success"> @Html.DisplayFor(model => model.AuthorId)</strong> |
             Date: <strong> @Html.DisplayFor(model => model.Date)</strong>
             <div class="pull-right">
                 <span class="badge" id="article-votes">@Model.Votes</span>
                 Likes
             </div>
             <br />
-           
+
             @if (User.Identity.IsAuthenticated && Model.UserCanVote)
             {
                 @Ajax.ActionLink("(Vote)", "Vote", "Post", new { id = Model.Id }, new AjaxOptions
-        {
-            InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "article-votes",
-            HttpMethod = "POST",
-            OnSuccess = "hideVoteButton"
-        },
-                 new { id = "vote-button", @class = "glyphicon glyphicon-thumbs-up pull-right" })
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "article-votes",
+                    HttpMethod = "POST",
+                    OnSuccess = "hideVoteButton"
+                },
+                    new { id = "vote-button", @class = "glyphicon glyphicon-thumbs-up pull-right" })
             }
             else if (!User.Identity.IsAuthenticated)
             {
-               <br/>
+                <br />
                 <h4 class=" text-center text-danger alert alert-danger" role="alert">
                     @Html.ActionLink("Log in to vote or comment!", "Login", "Account", null, new { @class = "alert-link" })
                 </h4>
@@ -70,9 +74,10 @@
             else if (!@Model.UserCanVote)
             {
                 <div class=" pull-right">(You already like this :)</div>
-            }
+            }<hr />
         </div>
     </div>
+</div>
  
 </div>
 <div>
@@ -88,33 +93,38 @@
     <div><h4>@Model.CountComm Comments</h4></div>
 
  }*@
-<h4> Comments(@Model.Comments.Count)</h4><hr />
-<div id="Comments" class="row">
-    @foreach (var comment in Model.Comments.Where(x=>x.ParentId==null))
-    {
-        @Html.Partial("_CommentPartial", comment)
-        <div id="nestedComments"></div>
-        foreach (var x in Model.Comments.Where(x=>x.ParentId==comment.Id))
+<h4> Comments(@Model.Comments.Count)</h4>
+
+<div class="well-lg">
+    <div id="Comments" class="row">
+        @foreach (var comment in Model.Comments.Where(x => x.ParentId == null))
         {
-  
+            @Html.Partial("_CommentPartial", comment)
+            <div id="nestedComments"></div>
+            foreach (var x in Model.Comments.Where(x => x.ParentId == comment.Id))
+            {
+
+            }
+        }
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        using (Ajax.BeginForm("PostComment", "Post", new { id = Model.Id }, new AjaxOptions
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.InsertAfter,
+            UpdateTargetId = "Comments",
+            OnFailure = "commentPostFailure"
+        }))
+        {
+            @Html.Hidden("PostId", Model.Id)
+            @Html.TextArea("comment", new { id = "text" })
+            @Html.AntiForgeryToken()
+            <br />
+            <input type="submit" value="Comment" class="btn btn-default" onclick="hideFirstComment" />
         }
     }
 </div>
-@if (User.Identity.IsAuthenticated)
-{
-    using (Ajax.BeginForm("PostComment","Post", new {id =Model.Id}, new AjaxOptions 
-    { HttpMethod = "POST",
-        InsertionMode = InsertionMode.InsertAfter,
-        UpdateTargetId = "Comments",
-        OnFailure = "commentPostFailure" }))
-    {
-        @Html.Hidden("PostId", Model.Id)
-        @Html.TextArea("comment")
-        @Html.AntiForgeryToken()
-        <br />
-        <input type="submit" value="Comment" class="btn btn-default" onclick="hideFirstComment" />
-    }
-}
 
 @section scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
@@ -131,9 +141,7 @@
             alert("Error");
         }
 
-        function hideVoteButton() {
-            $("#vote-button").hide();
-        }
+       
 
         function hideFirstComment() {
             if ($('#Comments').innerHTML!=null) {
@@ -148,5 +156,5 @@
 
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
-    @Html.ActionLink("Back to List", "Index", new{id =Model.TagId})
+    @Html.ActionLink("Back to List", "Index", new { id = Model.TagId }, new { @class = "btn btn-default btn-sm" })
 </p>

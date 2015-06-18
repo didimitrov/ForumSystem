@@ -6,6 +6,11 @@ namespace ForumSystem.Models
 {
     public class Comment
     {
+        public Comment()
+        {
+            this.Votes=new HashSet<Vote>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -21,6 +26,8 @@ namespace ForumSystem.Models
 
         public int? ParentId { get; set; }
         public Comment[] ChildComments { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
 
         public DateTime DateTime { get; set; }
     }

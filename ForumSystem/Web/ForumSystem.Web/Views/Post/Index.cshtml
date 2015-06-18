@@ -12,7 +12,7 @@
         color: whitesmoke;
     }
     #scores {
-        background-color: #000000; border-radius: 5px; border:1px solid red;
+        background-color: ; border-radius: 5px; border:1px solid wheat;
     }
     h4>a {
         color: #000000;
@@ -22,7 +22,7 @@
     }
 </style>
 
-<div class="container col-md-12">
+<div class="container col-md-12 ">
     <div class="row">
         <div class="col-md-7 col-md-offset-3">
             <h4 class="ask"> @Html.ActionLink("Ask question", "Ask", "Questions", new { id = ViewData["TagId"] },null)</h4><hr />
@@ -31,22 +31,24 @@
     @foreach (var item in Model)
     {
         //todo:try with Media-heading Bootstarp
-        <div class="row">
-            <div id="scores" class="col-md-1 text-center">
-                <div class="label label-success" style="background-color: #000000">
-                    <p style="font-size: 2em">@item.CountVotes<br />
-                    </p>
-                    <span>votes</span>
-                </div>
+        <div class="row well">
+            @*<div id="scores" class="col-md-1 text-center">*@
+            <div id="scores" class="label label-info col-md-1 text-center">
+                
+                <p style="font-size: 2em">
+                    @item.CountVotes<br />
+                </p>
+                <span>votes</span>
+                @*</div>*@
             </div>
             
-            <div id="scores" class="col-md-1 text-center" >
-                <div class=" label label-success" style="background-color: #000000">
-                    <p style="font-size: 2em">
-                        @item.CountComm<br />
-                    </p>
-                    <span>answers</span>
-                </div>
+            @*<div id="scores" class="col-md-1 text-center" >*@
+            <div id="scores" class=" label label-info col-md-1 text-center">
+                <p style="font-size: 2em">
+                    @item.CountComm<br />
+                </p>
+                <span>answers</span>
+                @*</div>*@
             </div>
             <div class="col-md-7 col-md-offset-1">
                 <div class="row">                    
@@ -58,14 +60,12 @@
                     </p>
                 </div>
                 <div class="row">
-                    <span class="label label-info"><a href="#">@item.Tag</a></span>
-                    @*<span class="label label-info">Education</span>
-                    <span class="label label-info">MVC</span>*@
+                    <span class="label label-default"><a href="#">@item.Tag</a></span>
                     
                 </div>
             </div>
         </div>   
-        <hr/>   
+        @*<hr/>*@   
     }
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 </div>

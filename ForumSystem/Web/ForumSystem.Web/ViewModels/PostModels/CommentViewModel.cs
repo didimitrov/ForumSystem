@@ -16,5 +16,7 @@ namespace ForumSystem.Web.ViewModels.PostModels
         public DateTime DateTime { get; set; }
 
         public int? ParentId { get; set; }
+
+        public int Votes { get; set; }
     }
 }

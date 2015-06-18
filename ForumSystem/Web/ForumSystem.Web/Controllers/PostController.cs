@@ -67,8 +67,10 @@ namespace ForumSystem.Web.Controllers
             {
                 Comments = x.Comments.Select(y => new CommentViewModel
                 {
+                    Id = y.Id,
                     AuthorUsername = y.Author.UserName,
-                    Content = y.Content
+                    Content = y.Content,
+                    Votes = y.Votes.Count()
                 }).ToList(),
                 Id = x.Id,
                 TagId = x.TagId,
@@ -78,7 +80,8 @@ namespace ForumSystem.Web.Controllers
                 Date = x.AskedOn,
                 UserCanVote = x.Votes.All(pesho => pesho.VotedById != currentUserId),
                 Votes = x.Votes.Count,
-                CountComm = x.Comments.Count
+                CountComm = x.Comments.Count,
+               
             }).FirstOrDefault();
 
             return View(detailsModel);
@@ -133,6 +136,32 @@ namespace ForumSystem.Web.Controllers
             }
             return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest, ModelState.Values.First().ToString());
         }
+
+        [HttpPost]
+        public ActionResult CommentVoteUp(int commentId)
+        {
+             var userId = User.Identity.GetUserId();
+          //   var canVote = !_votes.All().Any(x => x.CommentId == commentId && x.VotedById == userId);
+           
+                var comm = _comments.All().SingleOrDefault(x => x.Id == commentId);
+                if (comm != null)
+                    comm.Votes.Add(new Vote
+                    {
+                        CommentId = commentId,
+                        VotedById = userId,
+                    });
+                _comments.SaveChanges();
+            
+
+            var CommVoteCount = _comments.GetById(commentId).Votes.Count();
+            if (CommVoteCount != 0)
+            {
+                return Content(CommVoteCount.ToString(CultureInfo.InvariantCulture));
+            }
+            return Content("10");
+        }
+
+          
 
         public ActionResult Search(string search, string searchBy, string sortBy, int? page)
         {

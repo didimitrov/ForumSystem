@@ -1,10 +1,29 @@
-﻿@model ForumSystem.Web.ViewModels.PostModels.CommentViewModel
-<div class="jumbotron" style="border: 1px solid purple; max-height: 150px; margin-bottom: 10px">
-    <div><strong>@Model.Content</strong></div><br />
-    <div><span>commented by <em><strong>@Model.AuthorUsername</strong></em></span> on <strong>@Model.DateTime</strong></div>
-    @*<a href="#" class="pull-right label label-info">Replay</a>*@
+﻿@using System.Data.Entity.Core.Common.EntitySql
+@using System.Web.UI.WebControls.Adapters
+@model ForumSystem.Web.ViewModels.PostModels.CommentViewModel
+<div class="panel" style="border: 1px solid black; max-height: 150px; margin-bottom: 10px">
+    <div class="panel-body"><strong>@Model.Content</strong></div><br />
+    <div class="panel-footer"><span>commented by <em><strong class="label label-success">@Model.AuthorUsername</strong></em></span> on <strong>@Model.DateTime</strong>
+        <div class="pull-right ">
+            <span class="badge" id="comment-votes">@Model.Votes</span>
+            @Ajax.ActionLink("[+]", "CommentVoteUp","Post", new {commentId = Model.Id },
+                new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "comment-votes",
+                    OnSuccess = "hideCommentVoteButton",
+                },
+
+                new { id = "vote-comment-button", @class = "btn btn-xs btn-primary"})
+        </div>
+    </div>
+    
+    
     
 
+    @*<a href="#" class="pull-right label label-info">Replay</a>*@
+  
     @*@Ajax.ActionLink("Replay", "CreateComments","Post", new AjaxOptions
    {
        HttpMethod = "GET",
@@ -36,29 +55,31 @@
 @section scripts{
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script>
-        function commentPostFailure() {
-            alert("Error");
-        }
+        $(document).ready(function() {
 
-        function hideVoteButton() {
-            $("#vote-button").hide();
-        }
 
-        function commentPostFailure() {
-            alert("Error");
-        }
-
-        function hideVoteButton() {
-            $("#vote-button").hide();
-        }
-
-        function hideFirstComment() {
-            if ($('#Comments').innerHTML != null) {
-                $('#firstComment').hide();
-
+            function commentPostFailure() {
+                alert("Error");
             }
 
-        }
+
+            function commentPostFailure() {
+                alert("Error");
+            }
+
+            function hideVoteButton() {
+                $("#vote-comment-button").hide();
+            }
+
+
+            function hideFirstComment() {
+                if ($('#Comments').innerHTML != null) {
+                    $('#firstComment').hide();
+
+                }
+            }
+
+        })
 
     </script>
 }
